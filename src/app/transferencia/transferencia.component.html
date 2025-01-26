@@ -1,0 +1,99 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Agendamento de Transferências</h2>
+    <p><strong>Conta:</strong> {{ contaOrigem }}</p>
+  
+    <!-- Formulário de Agendamento -->
+    <form (ngSubmit)="agendar()" class="mb-5">
+      <div class="form-group">
+        <label for="contaDestino">Conta Destino</label>
+        <input
+          id="contaDestino"
+          [(ngModel)]="contaDestino"
+          name="contaDestino"
+          type="text"
+          class="form-control"
+          placeholder="Informe a conta destino"
+          required
+        />
+      </div>
+      <div class="form-group mt-3">
+        <label for="valor">Valor</label>
+        <input
+          id="valor"
+          [(ngModel)]="valor"
+          name="valor"
+          type="number"
+          class="form-control"
+          placeholder="Informe o valor"
+          required
+        />
+      </div>
+      <div class="form-group mt-3">
+        <label for="dataTransferencia">Data da Transferência</label>
+        <input
+          id="dataTransferencia"
+          [(ngModel)]="dataTransferencia"
+          name="dataTransferencia"
+          type="date"
+          class="form-control"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary mt-4">Agendar</button>
+    </form>
+  
+    <!-- Mensagem -->
+    <div *ngIf="mensagem" class="alert alert-info">{{ mensagem }}</div>
+  
+    <!-- Agendamentos Feitos -->
+    <h3 class="mt-5">Agendamentos Feitos</h3>
+    <div *ngIf="!mensagem && agendamentosFeitos.length > 0">
+      <table class="table table-bordered mt-3">
+        <thead>
+          <tr>
+            <th>Conta Destino</th>
+            <th>Valor</th>
+            <th>Taxa</th>
+            <th>Data Transferência</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let agendamento of agendamentosFeitos">
+            <td>{{ agendamento.contaDestino }}</td>
+            <td>{{ agendamento.valor | currency }}</td>
+            <td>{{ agendamento.taxa | currency }}</td>
+            <td>{{ agendamento.dataTransferencia | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Extrato -->
+    <h3 class="mt-5">Extrato</h3>
+    <div *ngIf="!mensagem && extratos.length > 0">
+      <table class="table table-bordered mt-3">
+        <thead>
+          <tr>
+            <th>Conta Origem</th>
+            <th>Conta Destino</th>
+            <th>Valor</th>
+            <th>Taxa</th>
+            <th>Data Transferência</th>
+            <th>Data Agendamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let extrato of extratos">
+            <td>{{ extrato.contaOrigem }}</td>
+            <td>{{ extrato.contaDestino }}</td>
+            <td>{{ extrato.valor | currency }}</td>
+            <td>{{ extrato.taxa | currency }}</td>
+            <td>{{ extrato.dataTransferencia | date }}</td>
+            <td>{{ extrato.dataAgendamento | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-secondary mt-3" (click)="baixarExtrato()">Baixar Extrato PDF</button>
+    </div>
+  </div>
+  

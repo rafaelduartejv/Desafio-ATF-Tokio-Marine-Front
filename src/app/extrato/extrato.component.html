@@ -1,0 +1,39 @@
+<div class="container mt-4">
+    <h2>Extrato de Transferências</h2>
+  
+    <div *ngIf="mensagem" class="alert alert-danger mt-3">
+      {{ mensagem }}
+    </div>
+  
+    <div *ngIf="!mensagem && extratos.length > 0">
+      <table class="table table-striped mt-3">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Valor</th>
+            <th>Taxa</th>
+            <th>Data de Transferência</th>
+            <th>Data de Agendamento</th>
+            <th>Conta Origem</th>
+            <th>Conta Destino</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let extrato of extratos">
+            <td>{{ extrato.id }}</td>
+            <td>{{ extrato.valor | currency }}</td>
+            <td>{{ extrato.taxa | currency }}</td>
+            <td>{{ extrato.dataTransferencia | date }}</td>
+            <td>{{ extrato.dataAgendamento | date }}</td>
+            <td>{{ extrato.contaOrigem }}</td>
+            <td>{{ extrato.contaDestino }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div *ngIf="!mensagem && extratos.length === 0" class="alert alert-info mt-3">
+      Nenhuma transferência encontrada.
+    </div>
+  </div>
+  
