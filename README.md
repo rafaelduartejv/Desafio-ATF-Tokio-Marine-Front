@@ -1,59 +1,111 @@
-# DesafioTokioMarineFront
+# Sistema de Agendamento de Transferências Financeiras
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.4.
+## Descrição
 
-## Development server
+Este é um sistema para agendamento de transferências financeiras, desenvolvido como parte do desafio prático para avaliação de habilidades em desenvolvimento de software. A aplicação permite que os usuários:
 
-To start a local development server, run:
+1. Agendem transferências financeiras com dados como conta de origem, conta de destino, valor, data de transferência e data de agendamento.
+2. Visualizem o extrato completo de todas as transferências agendadas.
+3. Calculem automaticamente a taxa de acordo com as regras especificadas.
 
-```bash
-ng serve
-```
+## Decisões Arquiteturais
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Backend
 
-## Code scaffolding
+- **Tecnologia**: Desenvolvido em Java 11 utilizando o framework **Spring Boot**.
+- **Banco de Dados**: Utiliza um banco de dados em memória (**H2**) para persistência dos dados, garantindo simplicidade durante o desenvolvimento e execução.
+- **Estrutura**: Segue os princípios de arquitetura REST para organização das APIs.
+- **Validações**: Foram implementadas regras de negócio para o cálculo de taxas e validação de dados (como formato das contas e datas).
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Frontend
 
-```bash
-ng generate component component-name
-```
+- **Tecnologia**: Desenvolvido em **Angular**, devido à sua robustez e familiaridade.
+- **Design**: Utiliza estilos simples e modernos baseados no **Bootstrap 5** para uma interface limpa e responsiva.
+- **Funcionalidades**: Permite interações como cadastro de transferências, listagem de agendamentos e exibição de erros/alertas.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Ferramentas Utilizadas
 
-```bash
-ng generate --help
-```
+- **Java 11**
+- **Spring Boot**
+- **H2 Database**
+- **Angular**
+- **Bootstrap 5**
 
-## Building
+## Instruções para Configuração e Execução
 
-To build the project run:
+### Backend
 
-```bash
-ng build
-```
+1. Clone o repositório do backend:
+   ```bash
+   git clone <https://github.com/rafaelduartejv/Desafio-ATF-Tokio-Marine>
+   ```
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd Desafio-ATF-Tokio-Marine
+   ```
+3. Compile e inicie a aplicação:
+   ```bash
+   ./mvnw spring-boot:run
+   ```
+4. A API estará disponível em: `http://localhost:8080`
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Frontend
 
-## Running unit tests
+1. Clone o repositório do frontend:
+   ```bash
+   git clone <https://github.com/rafaelduartejv/Desafio-ATF-Tokio-Marine-Front>
+   ```
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd Desafio-ATF-Tokio-Marine-Front
+   ```
+3. Instale as dependências:
+   ```bash
+   npm install
+   ```
+4. Inicie o servidor de desenvolvimento:
+   ```bash
+   ng serve
+   ```
+5. A aplicação estará disponível em: `http://localhost:4200`
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Regras de Negócio para Cálculo de Taxas
 
-```bash
-ng test
-```
+A taxa é calculada com base na diferença entre a data de agendamento e a data da transferência, conforme a tabela:
 
-## Running end-to-end tests
+| Dias de Transferência | Taxa Fixa | Taxa Variável |
+| --------------------- | --------- | ------------- |
+| 0                     | R\$ 3,00  | 2,5%          |
+| 1 - 10                | R\$ 12,00 | 0%            |
+| 11 - 20               | R\$ 0,00  | 8,2%          |
+| 21 - 30               | R\$ 0,00  | 6,9%          |
+| 31 - 40               | R\$ 0,00  | 4,7%          |
+| 41 - 50               | R\$ 0,00  | 1,7%          |
 
-For end-to-end (e2e) testing, run:
+> Observação: Caso não haja taxa aplicável, a transferência não será permitida.
 
-```bash
-ng e2e
-```
+## Estrutura do Projeto
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Backend
 
-## Additional Resources
+- **Controller**: Gerencia as requisições e respostas.
+- **Service**: Contém a lógica de negócio.
+- **Repository**: Responsável por interagir com o banco de dados.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Frontend
+
+- **Componentes**: Dividem a interface em partes reutilizáveis (login, registro, agendamento, extrato).
+- **Serviços**: Gerenciam a comunicação com a API backend.
+- **Estilos**: Baseados em Bootstrap, ajustados para manter uma experiência limpa e responsiva.
+
+## Exemplo de Uso
+
+1. Acesse a página inicial e efetue login ou registre-se.
+2. Preencha os campos do formulário para agendar uma nova transferência.
+3. Visualize o extrato de transferências realizadas ou agendadas.
+4. Caso alguma validação falhe, mensagens de erro serão exibidas.
+
+## Considerações Finais
+
+Este projeto foi desenvolvido levando em consideração a clareza do código, boas práticas e a eficiência das soluções implementadas.
+
