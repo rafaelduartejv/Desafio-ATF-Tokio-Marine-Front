@@ -105,7 +105,35 @@ A taxa é calculada com base na diferença entre a data de agendamento e a data 
 3. Visualize o extrato de transferências realizadas ou agendadas.
 4. Caso alguma validação falhe, mensagens de erro serão exibidas.
 
+## Funcionalidades do Sistema
+
+### Tela de Login
+Acesse a tela de login para autenticação no sistema.
+
+![Tela de Login](src/imagens/Tela%20de%20login.PNG)
+
+### Tela de Registro
+Cadastre-se como novo usuário para utilizar o sistema.
+
+![Tela de Registro](src/imagens/Tela%20de%20registro.PNG)
+
+### Tela de Agendamento
+Agende transferências financeiras com facilidade.
+
+![Tela de Agendamento](src/imagens/tela%20de%20agendamento.PNG)
+
+### Tela de Extrato e Agendamento
+Visualize os agendamentos realizados e o extrato completo.
+
+![Tela de Extrato e Agendamento](src/imagens/tela%20de%20agendamento2.PNG)
+
+### Geração de PDF
+Exporte os agendamentos e extratos para um arquivo PDF.
+
+![Geração de PDF](src/imagens/tela%20de%20agendamentoPDF.PNG)
+
+---
+
 ## Considerações Finais
 
 Este projeto foi desenvolvido levando em consideração a clareza do código, boas práticas e a eficiência das soluções implementadas.
-
